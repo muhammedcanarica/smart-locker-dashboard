@@ -1,16 +1,66 @@
-# React + Vite
+# ESP32 Akıllı Kargo Dolabı İzleme Paneli
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Bu proje, ESP32 tabanlı akıllı kargo dolabı sistemi için hazırlanmış tek sayfalık bir web izleme ve admin-demo panelidir. Şu an gerçek ESP32 bağlantısı yoktur; arayüz mock data ile çalışır. Ama yapı, ileride `/status` ve `/logs` endpointlerinden veri alınabilecek şekilde hazırlanmıştır.
 
-Currently, two official plugins are available:
+## Projede Neler Var?
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Sistem durumu kartları: sistem durumu, bağlantı, emergency, reset, alarm ve son güncelleme bilgisi.
+- İki dolap kartı: Dolap 1 ve Dolap 2 için durum, kapak bilgisi, teslim kodu, kalan süre ve alarm bilgisi.
+- Aktif teslim kodları alanı: admin/demo kullanımı için kodları gösterme ve gizleme.
+- Sistem logları: demo sırasında sistem akışını anlatan modern event timeline görünümü.
+- Admin/demo butonları: durumu yenileme, kodları göster/gizle, emergency demo aç/kapat ve reset demo aç/kapat.
+- Alarm, emergency ve reset durumları için belirgin uyarı görünümleri.
+- Mobil uyumlu, modern ve koyu renkli dashboard tasarımı.
 
-## React Compiler
+## Tasarım
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Arayüz koyu gece mavisi ve mor arka plan üzerine pembe, mavi ve turkuaz vurgu renkleriyle tasarlandı. Kartlarda yumuşak gölge, hafif cam efekti ve gradient geçişler kullanıldı. Tasarım Celeste oyununun renk atmosferinden ilham alır, ancak pixel-art, oyun asseti, retro font veya 8-bit görünüm içermez.
 
-## Expanding the ESLint configuration
+## Teknolojiler
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React
+- Vite
+- JavaScript
+- Plain CSS
+
+Ekstra UI framework, backend veya ESP32/Arduino kodu kullanılmamıştır.
+
+## Çalıştırma
+
+Bağımlılıkları yüklemek için:
+
+```bash
+npm install
+```
+
+Geliştirme sunucusunu başlatmak için:
+
+```bash
+npm run dev
+```
+
+Production build almak için:
+
+```bash
+npm run build
+```
+
+Kod kontrolü için:
+
+```bash
+npm run lint
+```
+
+## Veri Yapısı
+
+Mock veri `src/App.jsx` içinde tutulur. Ana yapı şu alanlardan oluşur:
+
+- `system`: sistem durumu, bağlantı, emergency, reset, alarm ve son güncelleme bilgileri.
+- `lockers`: dolapların durum, kapak, teslim kodu, kalan süre ve alarm bilgileri.
+- `logs`: sistem olaylarını gösteren string listesi.
+
+Gerçek cihaz bağlantısı eklenmek istendiğinde `/status` ve `/logs` endpointleri için gerekli alanlar yorum satırı olarak bırakılmıştır.
+
+## Projenin Amacı
+
+Bu panelin amacı, ESP32 tabanlı akıllı kargo dolabı sisteminin durumunu web üzerinden anlaşılır biçimde izlemek ve demo/sunum sırasında sistem akışını profesyonel bir arayüzle göstermektir.
